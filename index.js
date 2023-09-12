@@ -9,12 +9,29 @@ const logger = require('./middleware/logger');
 const app = express();
 
 //init middleware
-app.use(logger)
+// app.use(logger);
 
-//rest api
-//? calling with postman
+//!rest api
+// get all members/data
 app.get('/api/members', (req, res) => {
     res.json(json);
+});
+
+// get one member/data item
+app.get('/api/members/:id', (req, res) => {
+    // ? gives back id param #
+    // res.send(req.params.id);
+
+    //? checks if id exists in json, returns t/f
+    const found = json.some(member => member.id === parseInt(req.params.id));
+
+    if(found) {
+        res.json(json.filter(member => member.id === parseInt(req.params.id)));
+
+    }
+    else {
+        res.status(400).json({msg: `No member with the id of ${req.params.id}`});
+    }
 });
 
 
