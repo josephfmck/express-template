@@ -2,17 +2,11 @@ const express = require('express');
 //path node module deals with file paths
 const path = require('path');
 
+//Modules
 const json = require('./json');
+const logger = require('./middleware/logger');
 
 const app = express();
-
-//middleware - handles req, res (next moves to next middleware in step)
-//? everytime we make a request, this runs. Ex. req to api/members, this logs in console
-const logger = (req, res, next) => {
-    //? protocol - http or https, get() = parts of url, host - localhost:5000, originalURL - /api/members page
-    console.log(`${req.protocol}://${req.get('host')}${req.originalUrl}`);
-    next();
-};
 
 //init middleware
 app.use(logger)
