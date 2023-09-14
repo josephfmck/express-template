@@ -7,11 +7,16 @@ const logger = require('./middleware/logger');
 
 const app = express();
 
+//!Middleware
 //init middleware
 // app.use(logger);
 
+//Body Parser
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 
+//!Router
 
 //static - serves static html files
 //set public as static folder, start from current dir, point to public dir
